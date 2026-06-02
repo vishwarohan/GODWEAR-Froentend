@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  background: #0f0d0b;
+  color: #ffffff;
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(201, 168, 76, 0.1), transparent 28rem),
+    linear-gradient(180deg, #0f0d0b 0%, #120f0c 44%, #0f0d0b 100%);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.container-god {
+  width: min(1180px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.focus-gold {
+  @apply focus:outline-none focus:ring-2 focus:ring-god-gold/60 focus:ring-offset-2 focus:ring-offset-god-bg;
+}
+
+.input-god {
+  @apply w-full rounded-xl border border-god-border bg-god-card px-4 py-3 text-sm text-white placeholder:text-god-muted focus-gold;
+}
+
+.btn-gold {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-god-gold px-5 py-3 text-sm font-bold uppercase tracking-wide text-god-bg shadow-gold transition hover:bg-[#e1c267] disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-god-border px-5 py-3 text-sm font-bold uppercase tracking-wide text-white transition hover:border-god-gold hover:text-god-gold disabled:cursor-not-allowed disabled:opacity-60;
+}
