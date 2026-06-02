@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaArrowRight, FaBolt, FaShieldAlt, FaSyncAlt, FaTint, FaWhatsapp, FaWind } from 'react-icons/fa';
 import HeroBanner from '../components/HeroBanner';
@@ -80,9 +80,15 @@ const reveal = {
 };
 
 const Home = () => {
+  const location = useLocation();
   const { data: featuredData, isLoading: featuredLoading } = useGetProductsQuery({ featured: true, limit: 8 });
   const { data: latestData, isLoading: latestLoading } = useGetProductsQuery({ limit: 8 });
   useEffect(() => setSeo('Luxury Activewear', 'Shop GOD WEAR premium compression activewear and luxury performance essentials.'), []);
+  useEffect(() => {
+    if (location.hash !== '#about') return;
+
+    requestAnimationFrame(() => document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  }, [location.hash]);
   const featuredProducts = featuredData?.products || featuredData || [];
   const latestProducts = latestData?.products || latestData || [];
   const products = featuredProducts.length ? featuredProducts : latestProducts;
@@ -152,7 +158,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section id="about" className="border-b border-god-border bg-[#100e0c] py-16 md:py-24" aria-labelledby="about-heading">
+      <section id="about" className="scroll-mt-24 border-b border-god-border bg-[#100e0c] py-16 md:py-24" aria-labelledby="about-heading">
         <div className="container-god">
           <motion.div {...reveal} className="max-w-3xl">
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-god-gold">About GOD WEAR</p>

@@ -6,6 +6,7 @@ import { logout } from '../redux/slices/authSlice';
 
 const links = [
   { to: '/', label: 'Home' },
+  { to: '/#about', label: 'About', anchor: true },
   { to: '/shop', label: 'Shop' },
   { to: '/contact', label: 'Contact' },
 ];
@@ -33,7 +34,11 @@ const Navbar = () => {
           <span className="font-heading text-4xl tracking-wide text-god-gold">GOD WEAR</span>
         </Link>
         <nav className="hidden items-center gap-8 md:flex">
-          {links.map((link) => <NavLink key={link.to} to={link.to} className={navClass}>{link.label}</NavLink>)}
+          {links.map((link) => (
+            link.anchor
+              ? <Link key={link.to} to={link.to} className="text-sm font-bold uppercase tracking-[0.18em] text-god-muted transition hover:text-white">{link.label}</Link>
+              : <NavLink key={link.to} to={link.to} className={navClass}>{link.label}</NavLink>
+          ))}
           {userInfo?.isAdmin && <NavLink to="/admin" className={navClass}>Admin</NavLink>}
         </nav>
         <div className="flex items-center gap-3">
@@ -65,7 +70,11 @@ const Navbar = () => {
       </div>
       {open && (
         <nav className="container-god grid gap-3 pb-5 md:hidden">
-          {links.map((link) => <NavLink key={link.to} to={link.to} onClick={() => setOpen(false)} className={navClass}>{link.label}</NavLink>)}
+          {links.map((link) => (
+            link.anchor
+              ? <Link key={link.to} to={link.to} onClick={() => setOpen(false)} className="text-sm font-bold uppercase tracking-[0.18em] text-god-muted transition hover:text-white">{link.label}</Link>
+              : <NavLink key={link.to} to={link.to} onClick={() => setOpen(false)} className={navClass}>{link.label}</NavLink>
+          ))}
           {userInfo && <NavLink to="/profile" onClick={() => setOpen(false)} className={navClass}>Profile</NavLink>}
           {userInfo?.isAdmin && <NavLink to="/admin" onClick={() => setOpen(false)} className={navClass}>Admin</NavLink>}
           {userInfo ? (
